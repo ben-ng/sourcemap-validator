@@ -34,6 +34,12 @@ validate = function (srcs, min, map, opts) {
     throw new Error('The map is not valid JSON');
   }
 
+  each(consumer.sources, function (src) {
+    var content = consumer.sourceContentFor(src);
+    if(content)
+      srcs[src] = content;
+  })
+
   opts = opts || {};
 
   each(srcs, function (src, file) {

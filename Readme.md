@@ -17,8 +17,6 @@ validate(minifiedCode, [sourceMap], [sourceContent]);
  * `sourceContent` is a map to the raw source files
     * Optional - If left empty, the inline `sourceContent` in `sourceMap` will be used
 
-If your `sourceMap` has inline `sourceContent`, those files will take precedence over the first argument to `validate`, so you can pass an empty object in.
-
 ## Examples
 
 ```js

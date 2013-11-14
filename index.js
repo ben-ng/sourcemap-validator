@@ -23,9 +23,16 @@ validateMapping = function (mapping) {
 
 // Validates an entire sourcemap
 validate = function (srcs, min, map, opts) {
-  var consumer = new SMConsumer(map)
+  var consumer
     , mappingCount = 0
     , splitSrcs = {};
+
+  try {
+    consumer = new SMConsumer(map)
+  }
+  catch (e) {
+    throw new Error('The map is not valid JSON');
+  }
 
   opts = opts || {};
 

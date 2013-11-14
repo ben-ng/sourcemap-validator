@@ -22,7 +22,7 @@ each(fixtures, function (fixture) {
         });
 
     assert.doesNotThrow(function () {
-      validate({'?': raw}, result.code, result.map);
+      validate(result.code, result.map, {'?': raw});
     }, 'Valid ' + fixture + ' sourcemap should not throw');
   };
 });

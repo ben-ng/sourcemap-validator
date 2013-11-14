@@ -8,12 +8,14 @@ Mapped all the things? Now validate all the maps.
 ## Usage
 
 ```js
-validate(sourceContent, minifiedCode, sourceMap);
+validate(minifiedCode, [sourceMap], [sourceContent]);
 ```
 
- * `sourceContent` is a map to the raw source files
  * `minifiedCode` is your minified code as a string
  * `sourceMap` is your sourcemap as a JSON string
+    * Optional - If left empty, the inline sourcemap in `minifiedCode` will be used
+ * `sourceContent` is a map to the raw source files
+    * Optional - If left empty, the inline `sourceContent` in `sourceMap` will be used
 
 If your `sourceMap` has inline `sourceContent`, those files will take precedence over the first argument to `validate`, so you can pass an empty object in.
 

@@ -15,7 +15,7 @@ tests['Invalid Backbone.js should throw name mismatch'] = function () {
 
   // There is an artifically introduced mismatch on line 2234 of the uncompressed source
   try {
-    validate({'backbone.js': raw}, min, map);
+    validate(min, map, {'backbone.js': raw});
   }
   catch (e) {
     assert.equal(expectedError.test(e.toString()), true, 'The validation error is not the expected one');
@@ -37,7 +37,7 @@ tests['Invalid Jquery should throw name mismatch'] = function () {
 
   // jQuery is hopelessly broken, with incorrect offsets EVERYWHERE.
   try {
-    validate({'jquery-1.10.2.js': raw}, min, map);
+    validate(min, map, {'jquery-1.10.2.js': raw});
   }
   catch (e) {
     assert.equal(expectedError.test(e.toString()), true, 'The validation error is not the expected one');
@@ -59,7 +59,7 @@ tests['Invalid Jquery should throw source missing'] = function () {
 
   // The raw source was not declared with the correct key, so this should throw
   try {
-    validate({'jquery-notreally.js': raw}, min, map);
+    validate(min, map, {'jquery-notreally.js': raw});
   }
   catch (e) {
     assert.equal(expectedError.test(e.toString()), true, 'The validation error is not the expected one');
@@ -79,8 +79,17 @@ tests['Valid Underscore should not throw'] = function () {
     , map = fs.readFileSync(path.join(usDir, 'underscore.min.map')).toString();
 
   assert.doesNotThrow(function () {
-    validate({'underscore.js': raw}, min, map);
+    validate(min, map, {'underscore.js': raw});
   }, 'Valid Underscore sourcemap should not throw');
+};
+
+tests['Valid Minifyified bundle with inline sourcemap should not throw'] = function () {
+  var mfDir = path.join(validDir, 'Minifyified')
+    , min = fs.readFileSync(path.join(mfDir, 'bundle.min.js')).toString();
+
+  assert.doesNotThrow(function () {
+    validate(min);
+  }, 'Valid Minifyified inline sourcemap and inline sourceContent should not throw');
 };
 
 module.exports = tests;

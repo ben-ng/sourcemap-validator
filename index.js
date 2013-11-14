@@ -37,10 +37,26 @@ validateMapping = function (mapping) {
 };
 
 // Validates an entire sourcemap
-validate = function (srcs, min, map, opts) {
+validate = function (min, map, srcs) {
   var consumer
     , mappingCount = 0
     , splitSrcs = {};
+
+  srcs = srcs || {};
+
+  // If no map was given, try to extract it from min
+  if(map == null) {
+    try {
+      var marker = '//@ sourceMappingURL=data:application/json;base64,'
+        , offset = min.indexOf(marker);
+
+      map = (new Buffer(min.substring(offset + marker.length), 'base64')).toString();
+      min = min.substring(0, offset);
+    }
+    catch (e) {
+      throw new Error('No map argument provided, and no inline sourcemap found');
+    }
+  }
 
   try {
     consumer = new SMConsumer(map)
@@ -54,8 +70,6 @@ validate = function (srcs, min, map, opts) {
     if(content)
       srcs[src] = content;
   })
-
-  opts = opts || {};
 
   each(srcs, function (src, file) {
     return splitSrcs[file] = src.split('\n'); // Split sources by line

@@ -1,10 +1,25 @@
 var validate
   , validateMapping
+  , toAscii
   , assert = require('assert')
   , SMConsumer = require('source-map').SourceMapConsumer
   , each = require('lodash.foreach')
   , template = require('lodash.template')
   , jsesc = require('jsesc');
+
+// Lifted from UglifyJS
+toAscii = function (str, identifier) {
+    return str.replace(/[\u0080-\uffff]/g, function(ch) {
+        var code = ch.charCodeAt(0).toString(16);
+        if (code.length <= 2 && !identifier) {
+            while (code.length < 2) code = "0" + code;
+            return "\\x" + code;
+        } else {
+            while (code.length < 4) code = "0" + code;
+            return "\\u" + code;
+        }
+    }).replace(/\x0B/g, "\\x0B");
+};
 
 // Performs simple validation of a mapping
 validateMapping = function (mapping) {
@@ -70,7 +85,9 @@ validate = function (srcs, min, map, opts) {
       expected = [
         mapping.name
       , '\'' + jsesc(mapping.name) + '\''
+      , '\'' + toAscii(mapping.name) + '\''
       , '"' + jsesc(mapping.name, {quotes: 'double'}) + '"'
+      , '"' + toAscii(mapping.name) + '"'
       ];
 
       // An exact match

@@ -24,7 +24,6 @@ validateMapping = function (mapping) {
 // Validates an entire sourcemap
 validate = function (srcs, min, map, opts) {
   var consumer = new SMConsumer(map)
-    , min = min.split('\n')
     , mappingCount = 0
     , splitSrcs = {};
 

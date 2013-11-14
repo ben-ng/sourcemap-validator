@@ -8,6 +8,18 @@ Mapped all the things? Now validate all the maps.
 ## Usage
 
 ```js
+validate(sourceContent, minifiedCode, sourceMap);
+```
+
+ * `sourceContent` is a map to the raw source files
+ * `minifiedCode` is your minified code as a string
+ * `sourceMap` is your sourcemap as a JSON string
+
+If your `sourceMap` has inline `sourceContent`, those files will take precedence over the first argument to `validate`, so you can pass an empty object in.
+
+## Examples
+
+```js
 var validate('sourcemap-validator')
   , fs = require('fs')
   , assert = require('assert')
@@ -16,9 +28,25 @@ var validate('sourcemap-validator')
   , map = fs.readFileSync('jquery.min.map');
 
 assert.doesNotThrow(function () {
-  validate({'?': raw}, min, map);
+  validate({'jquery.js': raw}, min, map);
 }, 'The sourcemap is not valid');
 ```
+
+```js
+var validate('sourcemap-validator')
+  , fs = require('fs')
+  , assert = require('assert')
+  , min = fs.readFileSync('bundle.min.js')
+  , map = fs.readFileSync('bundle.min.map');
+
+// Browserify bundles have inline sourceContent in their maps
+// so pass an emtpy object as the first argument.
+assert.doesNotThrow(function () {
+  validate({}, min, map);
+}, 'The sourcemap is not valid');
+```
+
+### validate(sourceContent, minifiedCode, mapJSON)
 
 ## Notes
 

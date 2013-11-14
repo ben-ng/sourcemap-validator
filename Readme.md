@@ -5,10 +5,9 @@ sourcemap-validator
 
 Mapped all the things? Now validate all the maps.
 
-Usage
------
+## Usage
 
-```
+```js
 var validate('sourcemap-validator')
   , fs = require('fs')
   , assert = require('assert')
@@ -21,8 +20,7 @@ assert.doesNotThrow(function () {
 }, 'The sourcemap is not valid');
 ```
 
-Notes
------
+## Notes
 
 The sourcemap spec isn't exactly very mature, so this module only aims to give you a Pretty Good™ idea of whether or not your sourcemap is correct.
 
@@ -31,7 +29,7 @@ The sourcemap spec isn't exactly very mature, so this module only aims to give y
 If a sourcemap maps "literal" without the quotes to column 3, we will consider that valid.
 
 **Example**
-```
+```js
 var v = {
   literal: true
 //^-- ok to map {name: literal, column: 3} here
@@ -47,6 +45,18 @@ See the discussion [here](https://github.com/mishoo/UglifyJS2/pull/303#issuecomm
 
 However, mapping something totally wrong like `"cookie"` to that index will throw an exception.
 
-## Missing mappings
+### Missing mappings
 
 There is no way for the validator to know if you are missing mappings. It can only ensure that the ones you made are sensible. The validator will consider a sourcemap with zero mappings invalid as a sanity check, but if your map at least one sensisble mapping, it is a valid map.
+
+## License
+The MIT License (MIT)
+
+Copyright (c) 2013 Ben Ng
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+

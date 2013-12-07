@@ -47,11 +47,11 @@ validate = function (min, map, srcs) {
   // If no map was given, try to extract it from min
   if(map == null) {
     try {
-      var marker = '//@ sourceMappingURL=data:application/json;base64,'
-        , offset = min.indexOf(marker);
+      var re = /\s*\/\/(?:@|#) sourceMappingURL=data:application\/json;base64,(\S*)$/m
+        , map = min.match(re);
 
-      map = (new Buffer(min.substring(offset + marker.length), 'base64')).toString();
-      min = min.substring(0, offset);
+      map = (new Buffer(map[1], 'base64')).toString();
+      min = min.replace(re, '');
     }
     catch (e) {
       throw new Error('No map argument provided, and no inline sourcemap found');
@@ -59,7 +59,7 @@ validate = function (min, map, srcs) {
   }
 
   try {
-    consumer = new SMConsumer(map)
+    consumer = new SMConsumer(map);
   }
   catch (e) {
     throw new Error('The map is not valid JSON');
@@ -69,7 +69,7 @@ validate = function (min, map, srcs) {
     var content = consumer.sourceContentFor(src);
     if(content)
       srcs[src] = content;
-  })
+  });
 
   each(srcs, function (src, file) {
     return splitSrcs[file] = src.split('\n'); // Split sources by line

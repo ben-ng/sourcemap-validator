@@ -1,5 +1,12 @@
 {
   "author": "Ben Ng <me@benng.me> (http://benng.me)",
+  "contributors": [
+    {
+      "name" : "Jesús Leganés Combarro 'piranna'",
+      "email" : "piranna@gmail.com",
+      "url" : "http://pirannafs.blogspot.com.es"
+    }
+  ],
   "name": "sourcemap-validator",
   "description": "Map all the things, check all the maps",
   "keywords": [

@@ -2,9 +2,9 @@
   "author": "Ben Ng <me@benng.me> (http://benng.me)",
   "contributors": [
     {
-      "name" : "Jesús Leganés Combarro 'piranna'",
-      "email" : "piranna@gmail.com",
-      "url" : "http://pirannafs.blogspot.com.es"
+      "name": "Jesús Leganés Combarro 'piranna'",
+      "email": "piranna@gmail.com",
+      "url": "http://pirannafs.blogspot.com.es"
     }
   ],
   "name": "sourcemap-validator",
@@ -18,7 +18,7 @@
     "validator",
     "sourcemap"
   ],
-  "version": "1.0.3",
+  "version": "1.0.4",
   "repository": {
     "type": "git",
     "url": "git://github.com/ben-ng/sourcemap-validator.git"

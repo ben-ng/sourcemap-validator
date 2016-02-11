@@ -141,6 +141,9 @@ validate = function (min, map, srcs) {
     }
   });
 
+  if (typeof map === 'string') {
+    map = JSON.parse(map);
+  }
   assert.ok(map.sources && map.sources.length, 'There were no sources in the file');
   assert.ok(mappingCount > 0, 'There were no mappings in the file');
 };

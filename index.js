@@ -23,15 +23,17 @@ toAscii = function (str, identifier) {
 
 // Performs simple validation of a mapping
 validateMapping = function (mapping) {
-  assert.ok(mapping.generatedColumn!=null, 'missing generated column');
-  assert.ok(mapping.generatedLine!=null, 'missing generated line');
-  assert.ok(mapping.generatedColumn >= 0, 'generated column must be greater or equal to zero');
-  assert.ok(mapping.generatedLine >= 0, 'generated line must be greater or equal to zero');
+  var prettyMapping = JSON.stringify(mapping, null, 2);
 
-  assert.ok(mapping.originalColumn!=null, 'missing original column');
-  assert.ok(mapping.originalLine!=null, 'missing original line');
-  assert.ok(mapping.originalColumn >= 0, 'original column must be greater or equal to zero');
-  assert.ok(mapping.originalLine >= 0, 'original line must be greater or equal to zero');
+  assert.ok(mapping.generatedColumn!=null, 'missing generated column, mapping: ' + prettyMapping);
+  assert.ok(mapping.generatedLine!=null, 'missing generated line, mapping: ' + prettyMapping);
+  assert.ok(mapping.generatedColumn >= 0, 'generated column must be greater or equal to zero, mapping: ' + prettyMapping);
+  assert.ok(mapping.generatedLine >= 0, 'generated line must be greater or equal to zero: ' + prettyMapping);
+
+  assert.ok(mapping.originalColumn!=null, 'missing original column, mapping: ' + prettyMapping);
+  assert.ok(mapping.originalLine!=null, 'missing original line, mapping: ' + prettyMapping);
+  assert.ok(mapping.originalColumn >= 0, 'original column must be greater or equal to zero, mapping: ' + prettyMapping);
+  assert.ok(mapping.originalLine >= 0, 'original line must be greater or equal to zero, mapping: ' + prettyMapping);
 
   assert.notEqual(mapping.source, null, 'source is missing');
 };

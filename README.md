@@ -20,7 +20,7 @@ validate(minifiedCode, [sourceMap], [sourceContent]);
 ## Examples
 
 ```js
-var validate('sourcemap-validator')
+var validate = require('sourcemap-validator')
   , fs = require('fs')
   , assert = require('assert')
   , raw = fs.readFileSync('jquery.js')
@@ -33,7 +33,7 @@ assert.doesNotThrow(function () {
 ```
 
 ```js
-var validate('sourcemap-validator')
+var validate = require('sourcemap-validator')
   , fs = require('fs')
   , assert = require('assert')
   , min = fs.readFileSync('bundle.min.js')

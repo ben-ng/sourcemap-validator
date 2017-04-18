@@ -143,7 +143,10 @@ validate = function (min, map, srcs) {
     }
   });
 
-  assert.ok(JSON.parse(map).sources && JSON.parse(map).sources.length, 'There were no sources in the file');
+  if (typeof map === 'string') {
+    map = JSON.parse(map);
+  }
+  assert.ok(map.sources && map.sources.length, 'There were no sources in the file');
   assert.ok(mappingCount > 0, 'There were no mappings in the file');
 };
 

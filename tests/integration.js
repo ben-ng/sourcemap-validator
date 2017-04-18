@@ -25,6 +25,31 @@ each(fixtures, function (fixture) {
       validate(result.code, result.map, {'?': raw});
     }, 'Valid ' + fixture + ' sourcemap should not throw');
   };
+
+  tests['Uglified ' + fixture + ' should throw when missing sources'] = function () {
+    var raw = fs.readFileSync(path.join(libDir, fixture)).toString()
+      , result = uglify.minify(raw, {
+          outSourceMap: fixture + '.min.map'
+        , fromString: true
+        });
+
+    assert.throws(function () {
+      validate(result.code, result.map);
+    }, 'Valid ' + fixture + ' sourcemap should throw');
+  };
+
+  tests['Uglified (Inline source)' + fixture + ' should not throw'] = function () {
+    var raw = fs.readFileSync(path.join(libDir, fixture)).toString()
+      , result = uglify.minify(path.join(libDir, fixture), {
+          outSourceMap: fixture + '.min.map'
+        , fromString: false
+        , sourceMapIncludeSources: true
+        });
+
+    assert.doesNotThrow(function () {
+      validate(result.code, JSON.parse(result.map));
+    }, 'Valid ' + fixture + ' sourcemap should not throw');
+  };
 });
 
 module.exports = tests;

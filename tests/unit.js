@@ -92,4 +92,23 @@ tests['Valid Minifyified bundle with inline sourcemap should not throw'] = funct
   }, 'Valid Minifyified inline sourcemap and inline sourceContent should not throw');
 };
 
+tests['Valid babel-transpiled module with external sourcemap should not throw'] = function () {
+  var mfDir = path.join(validDir, 'EmberTranspiled')
+    , transpiled = fs.readFileSync(path.join(mfDir, 'app.external.js')).toString()
+    , map = fs.readFileSync(path.join(mfDir, 'app.external.map')).toString();
+
+  assert.doesNotThrow(function () {
+    validate(transpiled, map);
+  }, 'Valid babel-transpiled module with external sourcemap should not throw');
+};
+
+tests['Valid babel-transpiled module with inline sourcemap should not throw'] = function () {
+  var mfDir = path.join(validDir, 'EmberTranspiled')
+    , transpiled = fs.readFileSync(path.join(mfDir, 'app.inline.js')).toString();
+
+  assert.doesNotThrow(function () {
+    validate(transpiled);
+  }, 'Valid babel-transpiled module with inline sourcemap should not throw');
+};
+
 module.exports = tests;

@@ -23,8 +23,8 @@ validate(minifiedCode, [sourceMap], [sourceContent]);
 var validate = require('sourcemap-validator')
   , fs = require('fs')
   , assert = require('assert')
-  , min = fs.readFileSync('jquery.min.js')
-  , map = fs.readFileSync('jquery.min.map');
+  , min = fs.readFileSync('jquery.min.js', 'utf-8')
+  , map = fs.readFileSync('jquery.min.map', 'utf-8');
 
 assert.doesNotThrow(function () {
   validate(min, map, {'jquery.js': raw});
@@ -35,8 +35,8 @@ assert.doesNotThrow(function () {
 var validate = require('sourcemap-validator')
   , fs = require('fs')
   , assert = require('assert')
-  , min = fs.readFileSync('bundle.min.js')
-  , map = fs.readFileSync('bundle.min.map');
+  , min = fs.readFileSync('bundle.min.js', 'utf-8')
+  , map = fs.readFileSync('bundle.min.map', 'utf-8');
 
 // Browserify bundles have inline sourceContent in their maps
 // so no need to pass a `sourceContent` object.

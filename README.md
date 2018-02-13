@@ -23,12 +23,11 @@ validate(minifiedCode, [sourceMap], [sourceContent]);
 var validate = require('sourcemap-validator')
   , fs = require('fs')
   , assert = require('assert')
-  , raw = fs.readFileSync('jquery.js')
-  , min = fs.readFileSync('jquery.min.js')
-  , map = fs.readFileSync('jquery.min.map');
+  , min = fs.readFileSync('jquery.min.js', 'utf-8')
+  , map = fs.readFileSync('jquery.min.map', 'utf-8');
 
 assert.doesNotThrow(function () {
-  validate({'jquery.js': raw}, min, map);
+  validate(min, map, {'jquery.js': raw});
 }, 'The sourcemap is not valid');
 ```
 
@@ -36,13 +35,13 @@ assert.doesNotThrow(function () {
 var validate = require('sourcemap-validator')
   , fs = require('fs')
   , assert = require('assert')
-  , min = fs.readFileSync('bundle.min.js')
-  , map = fs.readFileSync('bundle.min.map');
+  , min = fs.readFileSync('bundle.min.js', 'utf-8')
+  , map = fs.readFileSync('bundle.min.map', 'utf-8');
 
 // Browserify bundles have inline sourceContent in their maps
-// so pass an emtpy object as the first argument.
+// so no need to pass a `sourceContent` object.
 assert.doesNotThrow(function () {
-  validate({}, min, map);
+  validate(min, map);
 }, 'The sourcemap is not valid');
 ```
 

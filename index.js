@@ -85,9 +85,6 @@ validate = function (min, map, srcs) {
     // These validations can't be performed with just the mapping
     var originalLine
       , errMsg
-      , mapRef = template('<%=generatedLine%>:<%=generatedColumn%>'
-          + String.fromCharCode(parseInt(2192,16)) // Fancy arrow!
-          + '<%=originalLine%>:<%=originalColumn%> "<%=name%>" in <%=source%>')(mapping)
       , expected
       , actuals = []
       , success = false;
@@ -125,6 +122,10 @@ validate = function (min, map, srcs) {
       };
 
       if(!success) {
+        var mapRef = template('<%=generatedLine%>:<%=generatedColumn%>'
+          + String.fromCharCode(parseInt(2192,16)) // Fancy arrow!
+          + '<%=originalLine%>:<%=originalColumn%> "<%=name%>" in <%=source%>')(mapping);
+
         errMsg = template(''
           + 'Warning: mismatched names\n'
           + 'Expected: <%=expected%>\n'

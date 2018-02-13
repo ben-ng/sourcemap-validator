@@ -5,7 +5,8 @@ var validate
   , SMConsumer = require('source-map').SourceMapConsumer
   , each = require('lodash.foreach')
   , template = require('lodash.template')
-  , jsesc = require('jsesc');
+  , jsesc = require('jsesc')
+  , fancyArrow = String.fromCharCode(parseInt(2192,16));
 
 // Lifted from UglifyJS
 toAscii = function (str, identifier) {
@@ -85,16 +86,15 @@ validate = function (min, map, srcs) {
     // These validations can't be performed with just the mapping
     var originalLine
       , errMsg
-      , mapRef = template('<%=generatedLine%>:<%=generatedColumn%>'
-          + String.fromCharCode(parseInt(2192,16)) // Fancy arrow!
-          + '<%=originalLine%>:<%=originalColumn%> "<%=name%>" in <%=source%>')(mapping)
+      , mapRef
       , expected
       , actuals = []
       , success = false;
 
     if(mapping.name) {
-      if(!splitSrcs[mapping.source])
+      if(!splitSrcs[mapping.source]) {
         throw new Error(mapping.source + ' not found in ' + Object.keys(splitSrcs).join(', '));
+      }
 
       originalLine = splitSrcs[mapping.source][mapping.originalLine - 1];
 
@@ -125,6 +125,9 @@ validate = function (min, map, srcs) {
       };
 
       if(!success) {
+        mapRef = template('<%=generatedLine%>:<%=generatedColumn%>'
+                          + fancyArrow
+                          + '<%=originalLine%>:<%=originalColumn%> "<%=name%>" in <%=source%>')(mapping);
         errMsg = template(''
           + 'Warning: mismatched names\n'
           + 'Expected: <%=expected%>\n'

@@ -1,0 +1,19 @@
+define('test-sourcemaps/app', ['exports', 'test-sourcemaps/resolver', 'ember-load-initializers', 'test-sourcemaps/config/environment'], function (exports, _resolver, _emberLoadInitializers, _environment) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+
+  var App = Ember.Application.extend({
+    modulePrefix: _environment.default.modulePrefix,
+    podModulePrefix: _environment.default.podModulePrefix,
+    Resolver: _resolver.default
+  });
+
+  (0, _emberLoadInitializers.default)(App, _environment.default.modulePrefix);
+
+  exports.default = App;
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3Qtc291cmNlbWFwcy9hcHAuanMiXSwibmFtZXMiOlsiQXBwIiwiRW1iZXIiLCJBcHBsaWNhdGlvbiIsImV4dGVuZCIsIm1vZHVsZVByZWZpeCIsInBvZE1vZHVsZVByZWZpeCIsIlJlc29sdmVyIl0sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUtBLE1BQU1BLE1BQU1DLE1BQU1DLFdBQU4sQ0FBa0JDLE1BQWxCLENBQXlCO0FBQ25DQyxrQkFBYyxxQkFBT0EsWUFEYztBQUVuQ0MscUJBQWlCLHFCQUFPQSxlQUZXO0FBR25DQztBQUhtQyxHQUF6QixDQUFaOztBQU1BLHNDQUFpQk4sR0FBakIsRUFBc0IscUJBQU9JLFlBQTdCOztvQkFFZUosRyIsImZpbGUiOiJ0ZXN0LXNvdXJjZW1hcHMvYXBwLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IEVtYmVyIGZyb20gJ2VtYmVyJztcbmltcG9ydCBSZXNvbHZlciBmcm9tICcuL3Jlc29sdmVyJztcbmltcG9ydCBsb2FkSW5pdGlhbGl6ZXJzIGZyb20gJ2VtYmVyLWxvYWQtaW5pdGlhbGl6ZXJzJztcbmltcG9ydCBjb25maWcgZnJvbSAnLi9jb25maWcvZW52aXJvbm1lbnQnO1xuXG5jb25zdCBBcHAgPSBFbWJlci5BcHBsaWNhdGlvbi5leHRlbmQoe1xuICBtb2R1bGVQcmVmaXg6IGNvbmZpZy5tb2R1bGVQcmVmaXgsXG4gIHBvZE1vZHVsZVByZWZpeDogY29uZmlnLnBvZE1vZHVsZVByZWZpeCxcbiAgUmVzb2x2ZXJcbn0pO1xuXG5sb2FkSW5pdGlhbGl6ZXJzKEFwcCwgY29uZmlnLm1vZHVsZVByZWZpeCk7XG5cbmV4cG9ydCBkZWZhdWx0IEFwcDtcbiJdfQ==

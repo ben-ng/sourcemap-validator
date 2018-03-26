@@ -31,12 +31,14 @@ validateMapping = function (mapping) {
   assert.ok(mapping.generatedColumn >= 0, 'generated column must be greater or equal to zero, mapping: ' + prettyMapping);
   assert.ok(mapping.generatedLine >= 0, 'generated line must be greater or equal to zero: ' + prettyMapping);
 
-  assert.ok(mapping.originalColumn!=null, 'missing original column, mapping: ' + prettyMapping);
-  assert.ok(mapping.originalLine!=null, 'missing original line, mapping: ' + prettyMapping);
-  assert.ok(mapping.originalColumn >= 0, 'original column must be greater or equal to zero, mapping: ' + prettyMapping);
-  assert.ok(mapping.originalLine >= 0, 'original line must be greater or equal to zero, mapping: ' + prettyMapping);
-
-  assert.notEqual(mapping.source, null, 'source is missing');
+  // If the source is null, the original location data has been explicitly
+  // omitted from the map to clear the mapped state of a line.
+  if (typeof mapping.source === "string") {
+    assert.ok(mapping.originalColumn!=null, 'missing original column, mapping: ' + prettyMapping);
+    assert.ok(mapping.originalLine!=null, 'missing original line, mapping: ' + prettyMapping);
+    assert.ok(mapping.originalColumn >= 0, 'original column must be greater or equal to zero, mapping: ' + prettyMapping);
+    assert.ok(mapping.originalLine >= 0, 'original line must be greater or equal to zero, mapping: ' + prettyMapping);
+  }
 };
 
 // Validates an entire sourcemap

@@ -92,4 +92,13 @@ tests['Valid Minifyified bundle with inline sourcemap should not throw'] = funct
   }, 'Valid Minifyified inline sourcemap and inline sourceContent should not throw');
 };
 
+tests['Valid Babel map should not throw'] = function () {
+  var babelDir = path.join(validDir, 'Babel')
+    , map = fs.readFileSync(path.join(babelDir, 'router.js.map')).toString();
+
+  assert.doesNotThrow(function () {
+    validate(null, map);
+  }, 'Valid Minifyified inline sourcemap and inline sourceContent should not throw');
+};
+
 module.exports = tests;

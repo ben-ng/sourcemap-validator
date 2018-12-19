@@ -92,6 +92,16 @@ tests['Valid Minifyified bundle with inline sourcemap should not throw'] = funct
   }, 'Valid Minifyified inline sourcemap and inline sourceContent should not throw');
 };
 
+tests['Valid Minifyified bundle with inline sourcemap and charset should not throw'] = function () {
+  var mfDir = path.join(validDir, 'Minifyified')
+    , min = fs.readFileSync(path.join(mfDir, 'bundle.min.js')).toString()
+      .replace('/json;base64,', '/json;charset=utf-8;base64,');
+
+  assert.doesNotThrow(function () {
+    validate(min);
+  }, 'Valid Minifyified inline sourcemap and inline sourceContent should not throw');
+};
+
 tests['Valid Babel map should not throw'] = function () {
   var babelDir = path.join(validDir, 'Babel')
     , map = fs.readFileSync(path.join(babelDir, 'router.js.map')).toString();

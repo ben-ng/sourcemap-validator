@@ -41,6 +41,13 @@ validateMapping = function (mapping) {
   }
 };
 
+createBuffer = function (str, encoding) {
+  // [DEP0005] Buffer() is deprecated due to security and usability issues
+  // https://nodejs.org/api/buffer.html#buffer_new_buffer_array
+  // Preserving backward compatibility until dropping Node version prior to v5.10.0
+  return Buffer.hasOwnProperty('from') ? Buffer.from(str, encoding) : new Buffer(str, encoding);
+};
+
 // Validates an entire sourcemap
 validate = function (min, map, srcs) {
   var consumer
@@ -55,7 +62,7 @@ validate = function (min, map, srcs) {
       var re = /\s*\/\/(?:@|#) sourceMappingURL=data:application\/json;base64,(\S*)$/m
         , map = min.match(re);
 
-      map = (new Buffer(map[1], 'base64')).toString();
+      map = createBuffer(map[1], 'base64').toString();
       min = min.replace(re, '');
     }
     catch (e) {

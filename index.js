@@ -136,7 +136,7 @@ validate = function (min, map, srcs) {
           + 'Got: <%=actual%>\n'
           + 'Original Line: <%=original%>\n'
           + 'Mapping: <%=mapRef%>'
-          , {
+         )({
             expected: expected.join(' || ')
           , actual: actuals.join(' || ')
           , original: originalLine

@@ -1,7 +1,9 @@
+#!/usr/bin/env node
 var validate
   , validateMapping
   , toAscii
   , assert = require('assert')
+  , fs = require('fs')
   , SMConsumer = require('source-map').SourceMapConsumer
   , each = require('lodash.foreach')
   , template = require('lodash.template')
@@ -74,7 +76,7 @@ validate = function (min, map, srcs) {
     consumer = new SMConsumer(map);
   }
   catch (e) {
-    throw new Error('The map is not valid JSON');
+    throw new Error('The map is not valid JSON: ' + e);
   }
 
   each(consumer.sources, function (src) {
@@ -158,5 +160,11 @@ validate = function (min, map, srcs) {
   assert.ok(JSON.parse(map).sources && JSON.parse(map).sources.length, 'There were no sources in the file');
   assert.ok(mappingCount > 0, 'There were no mappings in the file');
 };
+
+// "main" entrypoint:
+if (typeof require !== 'undefined' && require.main === module) {
+    validate(fs.readFileSync(process.argv[2], 'utf-8'), fs.readFileSync(process.argv[3], 'utf-8'));
+    process.stdout.write("Validation OK");
+}
 
 module.exports = validate;

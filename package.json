@@ -18,7 +18,7 @@
     "validator",
     "sourcemap"
   ],
-  "version": "1.1.1",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/ben-ng/sourcemap-validator.git"
@@ -38,6 +38,6 @@
   },
   "optionalDependencies": {},
   "engines": {
-    "node": "^0.10 || ^4.5 || 6.* || >= 7.*"
+    "node": "8.* || >= 10.*"
   }
 }

@@ -59,7 +59,7 @@ validate = function (min, map, srcs) {
   // If no map was given, try to extract it from min
   if(map == null) {
     try {
-      var re = /\s*\/\/(?:@|#) sourceMappingURL=data:application\/json;base64,(\S*)$/m
+      var re = /\s*\/\/(?:@|#) sourceMappingURL=data:application\/json;(?:charset=utf-?8;)?base64,(\S*)$/m
         , map = min.match(re);
 
       map = createBuffer(map[1], 'base64').toString();

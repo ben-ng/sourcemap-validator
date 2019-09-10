@@ -18,7 +18,7 @@
     "validator",
     "sourcemap"
   ],
-  "version": "2.0.1",
+  "version": "2.1.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/ben-ng/sourcemap-validator.git"

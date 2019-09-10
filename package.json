@@ -29,6 +29,9 @@
     "lodash.template": "^4.5.0",
     "source-map": "~0.1.x"
   },
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "jake test --trace"
   },

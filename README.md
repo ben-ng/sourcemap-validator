@@ -17,6 +17,10 @@ validate(minifiedCode, [sourceMap], [sourceContent]);
  * `sourceContent` is a map to the raw source files
     * Optional - If left empty, the inline `sourceContent` in `sourceMap` will be used
 
+### CLI Usage
+
+    sourcemap-validate $minifiedFilePath $sourceMapFilePath
+
 ## Examples
 
 ```js

@@ -35,6 +35,9 @@
   "scripts": {
     "test": "jake test --trace"
   },
+  "bin": {
+    "sourcemap-validate": "./index.js"
+  },
   "devDependencies": {
     "jake": "0.7.x",
     "uglify-js": "2.4.x"
